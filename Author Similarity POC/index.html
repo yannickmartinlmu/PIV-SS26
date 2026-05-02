@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Author Similarity Map</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="stage">
+      <div class="algo-bar">
+        <button class="algo-btn active" data-algo="pca">PCA</button>
+        <button class="algo-btn" data-algo="tsne">t-SNE</button>
+        <button class="algo-btn" data-algo="umap">UMAP</button>
+      </div>
+      <svg id="viz" viewBox="0 0 1100 800" aria-label="Author similarity map"></svg>
+    </div>
+    <aside class="panel">
+      <h1>Author Similarity Map</h1>
+      <div class="subtitle">
+        Click an author to center them. Nearby circles are more similar in writing style.
+      </div>
+
+      <div class="card">
+        <h2>How the positioning works</h2>
+        <div class="hint">
+          The circles start with a 2D map produced by the active algorithm. After you click an
+          author, that author moves to the center and the others are re-positioned by their
+          distance from the selected author.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Selected author</h2>
+        <div id="selectedName" style="font-size:18px;font-weight:700;margin-bottom:10px;">—</div>
+        <div id="selectedBio" class="small">Click a circle to inspect its style profile.</div>
+      </div>
+
+      <div class="card">
+        <h2>Feature profile</h2>
+        <div id="featureBars" class="feature-grid"></div>
+      </div>
+
+      <div class="card">
+        <h2>Algorithms</h2>
+        <div class="hint">
+          <strong>PCA</strong> — linear projection that preserves global variance.<br/>
+          <strong>t-SNE</strong> — non-linear; emphasises local clusters.<br/>
+          <strong>UMAP</strong> — non-linear; balances local and global structure.<br/>
+          Switch with the buttons above the map. Press <kbd>B</kbd> to toggle biplot
+          arrows (PCA only).
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Legend</h2>
+        <div>
+          <span class="pill">higher vocabulary</span>
+          <span class="pill">harder to read</span>
+          <span class="pill">warmer mood</span>
+          <span class="pill">longer sentences</span>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Tip: you can swap in your own author data later. Just keep the same feature fields and the layout will still work.
+      </div>
+    </aside>
+  </div>
+
+  <script src="pca.js"></script>
+  <script src="tsne.js"></script>
+  <script src="umap.js"></script>
+  <script src="biplot.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
